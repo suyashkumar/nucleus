@@ -12,7 +12,5 @@ jobs:
       run: |
         set -x -e
         git log --pretty -1
-        BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
-        curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${NUCLEUS_BAZEL_VERSION}/bazel-${NUCLEUS_BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
-        sudo bash -e bazel-${NUCLEUS_BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+        source install.sh
         bazel test -c opt $COPT_FLAGS nucleus/...
