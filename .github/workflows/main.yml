@@ -14,6 +14,7 @@ jobs:
       run: |
         set -x -e
         git log --pretty -1
+        source install.sh
         BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
         curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
         sudo bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
