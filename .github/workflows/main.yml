@@ -1,0 +1,19 @@
+name: CI
+
+on: [push, pull_requ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        set -x -e
+        git log --pretty -1
+        BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
+        curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+        sudo bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+        bazel test -c opt $COPT_FLAGS nucleus/...
