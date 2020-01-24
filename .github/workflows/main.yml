@@ -1,8 +1,6 @@
 name: CI
 
 on: [push, pull_request]
-env:
-  BAZEL_VERSION: 2.0.0
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -16,6 +14,6 @@ jobs:
         git log --pretty -1
         source install.sh
         BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
-        curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
-        sudo bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+        curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${NUCLEUS_BAZEL_VERSION}/bazel-${NUCLEUS_BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+        sudo bash -e bazel-${NUCLEUS_BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
         bazel test -c opt $COPT_FLAGS nucleus/...
